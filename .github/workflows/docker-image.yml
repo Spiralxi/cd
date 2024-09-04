@@ -6,16 +6,19 @@ on:
       - master
 
 jobs:
-  build:
+  sonarcloud:
     runs-on: ubuntu-latest
     steps:
       # Checkout the repository code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
 
       # Run SonarCloud Scan
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: sonarsource/sonarcloud-github-action@v3.0.0
         with:
           args: >
             -Dsonar.projectKey=Spiralxi_cd
@@ -23,6 +26,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       # Log in to DockerHub using secrets
       - name: Log in to DockerHub
         uses: docker/login-action@v3
@@ -37,11 +47,12 @@ jobs:
       # Push the Docker image to DockerHub
       - name: Push Docker image
         run: docker push erwan5913/cd:${{ github.sha }}
+
   trivy:
     runs-on: ubuntu-latest
     steps:
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.4.0
         with:
           image-ref: 'docker.io/erwan5913/cd'
           format: 'table'
