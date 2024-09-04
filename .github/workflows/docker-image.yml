@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Analyze and Push Docker Image
 
 on:
   push:
@@ -12,8 +12,17 @@ jobs:
       # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
-        
 
+      # Run SonarCloud Scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=<your-sonarcloud-project-key>
+            -Dsonar.organization=<your-sonarcloud-organization>
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
       # Log in to DockerHub using secrets
       - name: Log in to DockerHub
         uses: docker/login-action@v3
