@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.11.0  # Utilisation de la version correcte
+        uses: aquasecurity/trivy-action@master  # Utiliser la version master
         with:
           image-ref: 'erwan5913/cd'
           format: 'table'
