@@ -52,9 +52,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.4.0
+        uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/erwan5913/cd'
+          image-ref: 'docker.io/erwan5913/cd:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
