@@ -19,7 +19,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=61b9a74e590b09098a0202520fd909f9c637eb7a
-            -Dsonar.organization=spiralxi
+            -Dsonar.organization=Erwan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
