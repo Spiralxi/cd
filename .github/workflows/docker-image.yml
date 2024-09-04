@@ -22,8 +22,8 @@ jobs:
 
       # Build the Docker image
       - name: Build Docker image
-        run: docker build -t <erwan5913>/cd:${{ github.sha }} .
+        run: docker build -t erwan5913/cd:${{ github.sha }} .
 
       # Push the Docker image to DockerHub
       - name: Push Docker image
-        run: docker push <erwan5913>/cd:${{ github.sha }}
+        run: docker push erwan5913/cd:${{ github.sha }}
