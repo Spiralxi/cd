@@ -12,8 +12,7 @@ jobs:
       # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          node-version: '20'  # Forcer Node.js 20 (optionnel)
+        
 
       # Log in to DockerHub using secrets
       - name: Log in to DockerHub
